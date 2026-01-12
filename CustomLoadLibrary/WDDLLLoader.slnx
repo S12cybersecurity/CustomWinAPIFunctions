@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="WDDLLLoader/WDDLLLoader.vcxproj" Id="475a774b-8594-4403-880c-1f46afb34535" />
+</Solution>

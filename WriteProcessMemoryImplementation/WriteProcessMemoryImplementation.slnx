@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="WriteProcessMemoryImplementation/WriteProcessMemoryImplementation.vcxproj" Id="72ada359-fd47-4aea-903f-1d6c36aa91ca" />
+</Solution>

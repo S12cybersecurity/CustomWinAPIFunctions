@@ -1,0 +1,6 @@
+﻿  WDDLLLoader.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 13 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  WDDLLLoader.vcxproj -> C:\Users\s12de\Documents\Github\malwaretechniques\Injection\DLLInjectionVariants\WDDLLLoader\x64\Release\WDDLLLoader.exe
