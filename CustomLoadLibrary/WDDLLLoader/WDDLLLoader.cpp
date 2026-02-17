@@ -30,6 +30,9 @@ HMODULE MyLoadLibrary(LPCWSTR lpFileName) {
     }
 
     NTSTATUS status = myLdrLoadDll(NULL, 0, &ustrModule, &hModule);
+    if (status != 0) {
+        return NULL;
+	}
     return (HMODULE)hModule;
 }
 
@@ -37,6 +40,7 @@ int main(int argc, char** argv) {
     HMODULE dll = MyLoadLibrary(L"C:\\Users\\Public\\DummyDLL.dll");
     if (dll) {
         cout << "loaded library!" << endl;
+        getchar();
         FreeLibrary(dll);
     }
     else {

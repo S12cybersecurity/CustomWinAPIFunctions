@@ -1,0 +1,51 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\s12de\\Documents\\Github\\CustomWinAPIFunctions\\CustomLoadLibrary\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{475A774B-8594-4403-880C-1F46AFB34535}|WDDLLLoader\\WDDLLLoader.vcxproj|C:\\Users\\s12de\\Documents\\Github\\CustomWinAPIFunctions\\CustomLoadLibrary\\WDDLLLoader\\WDDLLLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{475A774B-8594-4403-880C-1F46AFB34535}|WDDLLLoader\\WDDLLLoader.vcxproj|solutionrelative:WDDLLLoader\\WDDLLLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WDDLLLoader.cpp",
+              "DocumentMoniker": "C:\\Users\\s12de\\Documents\\Github\\CustomWinAPIFunctions\\CustomLoadLibrary\\WDDLLLoader\\WDDLLLoader.cpp",
+              "RelativeDocumentMoniker": "WDDLLLoader\\WDDLLLoader.cpp",
+              "ToolTip": "C:\\Users\\s12de\\Documents\\Github\\CustomWinAPIFunctions\\CustomLoadLibrary\\WDDLLLoader\\WDDLLLoader.cpp",
+              "RelativeToolTip": "WDDLLLoader\\WDDLLLoader.cpp",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAmwCcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-26T15:57:20.346Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1817,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

