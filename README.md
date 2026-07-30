@@ -1,5 +1,5 @@
-# CustomWinAPIFunctions
-This repository contains custom implementations of select WinAPI functions, written in C++ and aimed at exploring and demonstrating alternative approaches to common Windows API operations such as memory allocation, library loading, and process interaction.
+# UPrimitives
+This repository contains custom functions, written in C++ and aimed at exploring and demonstrating alternative approaches to common Windows API operations such as memory allocation, library loading, and process interaction.
 
 ## Implementations Overview
 #### 1. CustomLoadLibrary
@@ -10,3 +10,4 @@ This implementation provides a custom version of the VirtualAlloc function, spec
 
 #### 3. WriteProcessMemoryImplementation
 A custom take on the WriteProcessMemory function, enabling the writing of data to the virtual address space of another process. This implementation is particularly useful when combined with VirtualAlloc and LoadLibrary, facilitating tasks like injecting code or modifying memory in external processes.
+
