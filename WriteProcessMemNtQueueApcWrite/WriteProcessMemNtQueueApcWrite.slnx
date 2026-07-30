@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="WriteProcessMemNtQueueApcWrite/WriteProcessMemNtQueueApcWrite.vcxproj" Id="d5e699e0-7476-4db5-b0b6-24006e0aef01" />
+</Solution>

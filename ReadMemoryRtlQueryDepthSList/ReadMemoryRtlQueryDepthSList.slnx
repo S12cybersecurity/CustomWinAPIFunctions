@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="ReadMemoryRtlQueryDepthSList/ReadMemoryRtlQueryDepthSList.vcxproj" Id="c42aa07d-35ea-4f2f-948e-95e726dc9a91" />
+</Solution>

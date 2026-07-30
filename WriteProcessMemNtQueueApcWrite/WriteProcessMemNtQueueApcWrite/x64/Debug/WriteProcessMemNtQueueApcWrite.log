@@ -1,0 +1,322 @@
+﻿  WriteProcessMemNtQueueApcWrite.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(66,9): warning C4005: 'STATUS_WAIT_0': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2611,9):
+      see previous definition of 'STATUS_WAIT_0'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(227,9): warning C4005: 'STATUS_ABANDONED_WAIT_0': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2612,9):
+      see previous definition of 'STATUS_ABANDONED_WAIT_0'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(250,9): warning C4005: 'STATUS_USER_APC': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2613,9):
+      see previous definition of 'STATUS_USER_APC'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(286,9): warning C4005: 'STATUS_TIMEOUT': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2614,9):
+      see previous definition of 'STATUS_TIMEOUT'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(295,9): warning C4005: 'STATUS_PENDING': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2615,9):
+      see previous definition of 'STATUS_PENDING'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(751,9): warning C4005: 'DBG_EXCEPTION_HANDLED': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2616,9):
+      see previous definition of 'DBG_EXCEPTION_HANDLED'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(760,9): warning C4005: 'DBG_CONTINUE': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2617,9):
+      see previous definition of 'DBG_CONTINUE'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(835,9): warning C4005: 'STATUS_SEGMENT_NOTIFICATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2618,9):
+      see previous definition of 'STATUS_SEGMENT_NOTIFICATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(998,9): warning C4005: 'STATUS_FATAL_APP_EXIT': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2619,9):
+      see previous definition of 'STATUS_FATAL_APP_EXIT'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1345,9): warning C4005: 'DBG_REPLY_LATER': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2620,9):
+      see previous definition of 'DBG_REPLY_LATER'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1363,9): warning C4005: 'DBG_TERMINATE_THREAD': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2621,9):
+      see previous definition of 'DBG_TERMINATE_THREAD'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1372,9): warning C4005: 'DBG_TERMINATE_PROCESS': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2622,9):
+      see previous definition of 'DBG_TERMINATE_PROCESS'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1381,9): warning C4005: 'DBG_CONTROL_C': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2623,9):
+      see previous definition of 'DBG_CONTROL_C'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1390,9): warning C4005: 'DBG_PRINTEXCEPTION_C': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2624,9):
+      see previous definition of 'DBG_PRINTEXCEPTION_C'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1399,9): warning C4005: 'DBG_RIPEXCEPTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2625,9):
+      see previous definition of 'DBG_RIPEXCEPTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1408,9): warning C4005: 'DBG_CONTROL_BREAK': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2626,9):
+      see previous definition of 'DBG_CONTROL_BREAK'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1417,9): warning C4005: 'DBG_COMMAND_EXCEPTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2627,9):
+      see previous definition of 'DBG_COMMAND_EXCEPTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1426,9): warning C4005: 'DBG_PRINTEXCEPTION_WIDE_C': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2628,9):
+      see previous definition of 'DBG_PRINTEXCEPTION_WIDE_C'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1458,9): warning C4005: 'STATUS_GUARD_PAGE_VIOLATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2629,9):
+      see previous definition of 'STATUS_GUARD_PAGE_VIOLATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1469,9): warning C4005: 'STATUS_DATATYPE_MISALIGNMENT': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2630,9):
+      see previous definition of 'STATUS_DATATYPE_MISALIGNMENT'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1480,9): warning C4005: 'STATUS_BREAKPOINT': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2631,9):
+      see previous definition of 'STATUS_BREAKPOINT'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1491,9): warning C4005: 'STATUS_SINGLE_STEP': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2632,9):
+      see previous definition of 'STATUS_SINGLE_STEP'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1794,9): warning C4005: 'STATUS_LONGJUMP': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2633,9):
+      see previous definition of 'STATUS_LONGJUMP'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1821,9): warning C4005: 'STATUS_UNWIND_CONSOLIDATE': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2634,9):
+      see previous definition of 'STATUS_UNWIND_CONSOLIDATE'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(1945,9): warning C4005: 'DBG_EXCEPTION_NOT_HANDLED': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2635,9):
+      see previous definition of 'DBG_EXCEPTION_NOT_HANDLED'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2112,9): warning C4005: 'STATUS_ACCESS_VIOLATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2636,9):
+      see previous definition of 'STATUS_ACCESS_VIOLATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2121,9): warning C4005: 'STATUS_IN_PAGE_ERROR': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2637,9):
+      see previous definition of 'STATUS_IN_PAGE_ERROR'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2139,9): warning C4005: 'STATUS_INVALID_HANDLE': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2638,9):
+      see previous definition of 'STATUS_INVALID_HANDLE'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2184,9): warning C4005: 'STATUS_INVALID_PARAMETER': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2639,9):
+      see previous definition of 'STATUS_INVALID_PARAMETER'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2284,9): warning C4005: 'STATUS_NO_MEMORY': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2640,9):
+      see previous definition of 'STATUS_NO_MEMORY'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2341,9): warning C4005: 'STATUS_ILLEGAL_INSTRUCTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2641,9):
+      see previous definition of 'STATUS_ILLEGAL_INSTRUCTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2422,9): warning C4005: 'STATUS_NONCONTINUABLE_EXCEPTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2642,9):
+      see previous definition of 'STATUS_NONCONTINUABLE_EXCEPTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(2431,9): warning C4005: 'STATUS_INVALID_DISPOSITION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2643,9):
+      see previous definition of 'STATUS_INVALID_DISPOSITION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3364,9): warning C4005: 'STATUS_ARRAY_BOUNDS_EXCEEDED': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2644,9):
+      see previous definition of 'STATUS_ARRAY_BOUNDS_EXCEEDED'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3374,9): warning C4005: 'STATUS_FLOAT_DENORMAL_OPERAND': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2645,9):
+      see previous definition of 'STATUS_FLOAT_DENORMAL_OPERAND'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3384,9): warning C4005: 'STATUS_FLOAT_DIVIDE_BY_ZERO': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2646,9):
+      see previous definition of 'STATUS_FLOAT_DIVIDE_BY_ZERO'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3394,9): warning C4005: 'STATUS_FLOAT_INEXACT_RESULT': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2647,9):
+      see previous definition of 'STATUS_FLOAT_INEXACT_RESULT'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3404,9): warning C4005: 'STATUS_FLOAT_INVALID_OPERATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2648,9):
+      see previous definition of 'STATUS_FLOAT_INVALID_OPERATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3414,9): warning C4005: 'STATUS_FLOAT_OVERFLOW': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2649,9):
+      see previous definition of 'STATUS_FLOAT_OVERFLOW'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3424,9): warning C4005: 'STATUS_FLOAT_STACK_CHECK': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2650,9):
+      see previous definition of 'STATUS_FLOAT_STACK_CHECK'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3434,9): warning C4005: 'STATUS_FLOAT_UNDERFLOW': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2651,9):
+      see previous definition of 'STATUS_FLOAT_UNDERFLOW'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3444,9): warning C4005: 'STATUS_INTEGER_DIVIDE_BY_ZERO': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2652,9):
+      see previous definition of 'STATUS_INTEGER_DIVIDE_BY_ZERO'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3454,9): warning C4005: 'STATUS_INTEGER_OVERFLOW': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2653,9):
+      see previous definition of 'STATUS_INTEGER_OVERFLOW'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(3464,9): warning C4005: 'STATUS_PRIVILEGED_INSTRUCTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2654,9):
+      see previous definition of 'STATUS_PRIVILEGED_INSTRUCTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(4410,9): warning C4005: 'STATUS_STACK_OVERFLOW': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2655,9):
+      see previous definition of 'STATUS_STACK_OVERFLOW'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(4927,9): warning C4005: 'STATUS_DLL_NOT_FOUND': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2656,9):
+      see previous definition of 'STATUS_DLL_NOT_FOUND'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(4956,9): warning C4005: 'STATUS_ORDINAL_NOT_FOUND': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2657,9):
+      see previous definition of 'STATUS_ORDINAL_NOT_FOUND'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(4966,9): warning C4005: 'STATUS_ENTRYPOINT_NOT_FOUND': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2658,9):
+      see previous definition of 'STATUS_ENTRYPOINT_NOT_FOUND'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(4976,9): warning C4005: 'STATUS_CONTROL_C_EXIT': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2659,9):
+      see previous definition of 'STATUS_CONTROL_C_EXIT'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(5054,9): warning C4005: 'STATUS_DLL_INIT_FAILED': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2660,9):
+      see previous definition of 'STATUS_DLL_INIT_FAILED'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(6051,9): warning C4005: 'STATUS_CONTROL_STACK_VIOLATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2661,9):
+      see previous definition of 'STATUS_CONTROL_STACK_VIOLATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(7645,9): warning C4005: 'STATUS_FLOAT_MULTIPLE_FAULTS': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2662,9):
+      see previous definition of 'STATUS_FLOAT_MULTIPLE_FAULTS'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(7655,9): warning C4005: 'STATUS_FLOAT_MULTIPLE_TRAPS': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2663,9):
+      see previous definition of 'STATUS_FLOAT_MULTIPLE_TRAPS'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(7787,9): warning C4005: 'STATUS_REG_NAT_CONSUMPTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2664,9):
+      see previous definition of 'STATUS_REG_NAT_CONSUMPTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(8770,9): warning C4005: 'STATUS_HEAP_CORRUPTION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2665,9):
+      see previous definition of 'STATUS_HEAP_CORRUPTION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(8998,9): warning C4005: 'STATUS_STACK_BUFFER_OVERRUN': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2666,9):
+      see previous definition of 'STATUS_STACK_BUFFER_OVERRUN'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(9125,9): warning C4005: 'STATUS_INVALID_CRUNTIME_PARAMETER': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2667,9):
+      see previous definition of 'STATUS_INVALID_CRUNTIME_PARAMETER'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(9188,9): warning C4005: 'STATUS_ASSERTION_FAILURE': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2668,9):
+      see previous definition of 'STATUS_ASSERTION_FAILURE'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(10097,9): warning C4005: 'STATUS_ENCLAVE_VIOLATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2669,9):
+      see previous definition of 'STATUS_ENCLAVE_VIOLATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(10884,9): warning C4005: 'STATUS_INTERRUPTED': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2670,9):
+      see previous definition of 'STATUS_INTERRUPTED'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(10893,9): warning C4005: 'STATUS_THREAD_NOT_RUNNING': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2671,9):
+      see previous definition of 'STATUS_THREAD_NOT_RUNNING'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(11205,9): warning C4005: 'STATUS_ALREADY_REGISTERED': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2672,9):
+      see previous definition of 'STATUS_ALREADY_REGISTERED'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(15341,9): warning C4005: 'STATUS_SXS_EARLY_DEACTIVATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2674,9):
+      see previous definition of 'STATUS_SXS_EARLY_DEACTIVATION'
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\ntstatus.h(15350,9): warning C4005: 'STATUS_SXS_INVALID_DEACTIVATION': macro redefinition
+  (compiling source file 'WriteProcessMemNtQueueApcWrite.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winnt.h(2675,9):
+      see previous definition of 'STATUS_SXS_INVALID_DEACTIVATION'
+  
+  WriteProcessMemNtQueueApcWrite.vcxproj -> C:\Users\s12de\Documents\Github\CustomWinAPIFunctions\WriteProcessMemNtQueueApcWrite\x64\Debug\WriteProcessMemNtQueueApcWrite.exe
